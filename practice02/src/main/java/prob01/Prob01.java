@@ -14,10 +14,11 @@ public class Prob01 {
 		System.out.print("금액을 입력하세요. : ");
 		money = scanner.nextInt();
 		
-		for(int i=0; i<10; i++) {
-			money / MONEYS[i]
-		}
+		for (int i = 0; i < MONEYS.length; i++) {
+	        System.out.println(MONEYS[i]+"원: "+ money / MONEYS[i] + "개");
+	        money%= MONEYS[i];
 		
-		scanner.close();
  	}
+		scanner.close();
+}
 }
