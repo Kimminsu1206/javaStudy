@@ -1,9 +1,20 @@
-package paint;
+package com.douzone.paint.point;
 
-public class Point {
+import com.douzone.paint.i.Drawable;
+
+public class Point implements Drawable{
 
 	private int x;
 	private int y;
+	
+	public Point() {
+		
+	}
+	
+	public Point(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
 
 	public int getX() {
 		return x;
@@ -36,4 +47,10 @@ public class Point {
 //	public void disapear() {
 //		System.out.println("점[x="+ x + " , y= " + y + "]을 지웠습니다.");
 //	}
+
+	public void draw() {
+
+		show();
+		
+	}
 }

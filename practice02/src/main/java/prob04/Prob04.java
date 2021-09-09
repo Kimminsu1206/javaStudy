@@ -11,11 +11,11 @@ public class Prob04 {
 	
 	public static char[] reverse(String str) {
 		
-		String result="";
+		String result1="";
 		for(int i=str.length()-1; i>=0; i--) {
-			result += str.charAt(i);
+			result1 += str.charAt(i);
 		}
-		return result.toCharArray();
+		return result1.toCharArray();
 	}
 
 	public static void printCharArray(char[] array){
