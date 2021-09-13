@@ -2,6 +2,7 @@ package prob05;
 
 public class Base {
 	public void service(String state){
+		
 		if( state.equals( "낮" ) ) {
 			day();
 		} else {
@@ -16,4 +17,5 @@ public class Base {
 	public void night(){
 		System.out.println("night");
 	}
+	
 }
