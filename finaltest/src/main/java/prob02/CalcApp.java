@@ -8,7 +8,7 @@ public class CalcApp {
 		Scanner scanner = new Scanner(System.in);
 
 		while( true ) {
-			System.out.print( ">> " );
+			System.out.print( "숫자 2개와 연산자를 입력하세요 >> " );
 			String expression = scanner.nextLine();
 			
 			if( "quit".equals( expression ) ) {
@@ -28,6 +28,15 @@ public class CalcApp {
 			Arithmetic arithmetic = null;
 			
 			/* 코드 작성 */
+			if(tokens[2].equals("+")) {
+				arithmetic = new Add();
+			} else if(tokens[2].equals("-")){
+				arithmetic = new Subtract();
+			}else if(tokens[2].equals("*")){
+				arithmetic = new Multiple();
+			}else if(tokens[2].equals("/")){
+				arithmetic = new Division();
+			}
 			
 			int result = arithmetic.calculate(lValue, rValue);
 			System.out.println( ">> " + result );

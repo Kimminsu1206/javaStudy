@@ -94,7 +94,7 @@ public class RequestHandler extends Thread {
 
 		File file = new File(DOCUMENT_ROOT + url);
 		if (!file.exists()) {
-			// response404Error(outputStream, url, protocol);
+			response404Error(outputStream, url, protocol);
 			return;
 		}
 
