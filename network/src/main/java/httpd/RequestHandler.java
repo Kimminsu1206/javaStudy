@@ -55,11 +55,11 @@ public class RequestHandler extends Thread {
 			String[] tokens = request.split(" ");
 			if ("GET".equals(tokens[0])) {
 				consoleLog("request: " + tokens[1]);
-				responseStaticResource(outputStream, tokens[1], tokens[2]);
+				reponseStaticResource(outputStream, tokens[1], tokens[2]);
 			} else {
 				// methods: POST, PUT, DELETE, HEAD, CONNECT
 				// SimpleHttpServer 에서는 무시(400 Bad Request 처리)
-				// response400Error(outputStream, tokens[1], tokens[2]);
+				response400Error(outputStream, tokens[1], tokens[2]);
 			}
 
 			// 예제 응답입니다.
@@ -85,7 +85,48 @@ public class RequestHandler extends Thread {
 		}
 	}
 
-	private void responseStaticResource(OutputStream outputStream, String url, String protocol) throws IOException {
+	private void response400Error(OutputStream outputStream, String url, String protocol) throws IOException {
+
+		// badRequest
+		url = "/error/400.html";
+
+		File file = new File(DOCUMENT_ROOT + url);
+		if (!file.exists()) {
+			return;
+		}
+
+		// nio
+		byte[] body = Files.readAllBytes(file.toPath());
+		String contentType = Files.probeContentType(file.toPath());
+
+		outputStream.write((protocol + " 200 OK\n").getBytes("UTF-8"));
+		outputStream.write(("Content-Type:" + contentType + "; charset=utf-8\n").getBytes("UTF-8"));
+		outputStream.write("\n".getBytes());
+		outputStream.write(body);
+
+	}
+
+	private void response404Error(OutputStream outputStream, String url, String protocol) throws IOException {
+
+		url = "/error/404.html";
+		File file = new File(DOCUMENT_ROOT + url);
+		if (!file.exists()) {
+			response404Error(outputStream, url, protocol);
+			return;
+		}
+
+		// nio
+		byte[] body = Files.readAllBytes(file.toPath());
+		String contentType = Files.probeContentType(file.toPath());
+
+		outputStream.write((protocol + " 200 OK\n").getBytes("UTF-8"));
+		outputStream.write(("Content-Type:" + contentType + "; charset=utf-8\n").getBytes("UTF-8"));
+		outputStream.write("\n".getBytes());
+		outputStream.write(body);
+
+	}
+
+	private void reponseStaticResource(OutputStream outputStream, String url, String protocol) throws IOException {
 
 		// welcome file set
 		if ("/".equals(url)) {
